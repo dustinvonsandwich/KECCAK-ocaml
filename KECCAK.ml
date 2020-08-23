@@ -6,13 +6,13 @@
 *)
 
 
-
+let sha3_keccakf = 
 
     (* Association list for indexing. *)
     (* keccak[f] round constants*)
 
 
-    let keccakf_rndc : int64 list = 
+    let keccakf_rndc : int64 list in = 
         [0x0000000000000001L; 0x0000000000008082L; 0x800000000000808aL;
         0x8000000080008000L; 0x000000000000808bL; 0x0000000080000001L;
         0x8000000080008081L; 0x8000000000008009L; 0x000000000000008aL;
@@ -23,7 +23,7 @@
         0x8000000000008080L; 0x0000000080000001L; 0x8000000080008008L]
 
     (* keccak[f] rotate constants *)
-    let keccakf_rotc : int list = 
+    let keccakf_rotc : int list in = 
         [1;  3;  6;  10; 
         15; 21; 28; 36; 
         45; 55; 2;  14;
@@ -32,7 +32,7 @@
         39; 61; 20; 44]
 
     (* keccak[f] pi lane *)
-    let keccakf_piln : int list  = 
+    let keccakf_piln : int list in = 
         [10; 7;  11; 17; 
         18; 3; 5;  16; 
         8;  21; 24; 4;
@@ -49,3 +49,4 @@
         (* (((x) << (y)) | ((x) >> (64 - (y))))*)
         (x lsl y) lor (x lsr (64 - y));
 
+;
