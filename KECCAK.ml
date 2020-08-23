@@ -5,11 +5,12 @@
     ported by Dustin Ray - Summer 2020
 *)
 
+
+
+let sha3_keccakf st = 
+
 (* This would be a list or array in C/Java, a map here allows for accesing values easier. *)
 (* keccak[f] round constants*)
-
-let main st = 
-
 let keccakf_rndc = [0, 0x0000000000000001L; 1, 0x0000000000008082L; 2, 0x800000000000808aL;
                     3, 0x8000000080008000L; 4, 0x000000000000808bL; 5, 0x0000000080000001L;
                     6, 0x8000000080008081L; 7, 0x8000000000008009L; 8, 0x000000000000008aL;
