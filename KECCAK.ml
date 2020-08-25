@@ -6,47 +6,41 @@
 *)
 
 
-let sha3_keccakf = 
-
-    (* Association list for indexing. *)
-    (* keccak[f] round constants*)
-
-
-    let keccakf_rndc : int64 list in = 
-        [0x0000000000000001L; 0x0000000000008082L; 0x800000000000808aL;
-        0x8000000080008000L; 0x000000000000808bL; 0x0000000080000001L;
-        0x8000000080008081L; 0x8000000000008009L; 0x000000000000008aL;
-        0x0000000000000088L; 0x0000000080008009L; 0x000000008000000aL;
-        0x000000008000808bL; 0x800000000000008bL; 0x8000000000008089L;
-        0x8000000000008003L; 0x8000000000008002L; 0x8000000000000080L;
-        0x000000000000800aL; 0x800000008000000aL; 0x8000000080008081L;
-        0x8000000000008080L; 0x0000000080000001L; 0x8000000080008008L]
+    (* keccak[f] round constants as map*)
+    module KeccakfRndc = Map.Make(struct type t = int64 let compare = compare end)
+    let kRndc = KeccakfRndc.empty
+    let kRndc = KeccakfRndc.add 0x0000000000000001L let kRndc = KeccakfRndc.add  0x0000000000008082L let kRndc = KeccakfRndc.add  0x800000000000808aL  
+    let kRndc = KeccakfRndc.add 0x8000000080008000L let kRndc = KeccakfRndc.add  0x000000000000808bL let kRndc = KeccakfRndc.add  0x0000000080000001L  
+    let kRndc = KeccakfRndc.add 0x8000000080008081L let kRndc = KeccakfRndc.add  0x8000000000008009L let kRndc = KeccakfRndc.add  0x000000000000008aL  
+    let kRndc = KeccakfRndc.add 0x0000000000000088L let kRndc = KeccakfRndc.add  0x0000000080008009L let kRndc = KeccakfRndc.add  0x000000008000000aL  
+    let kRndc = KeccakfRndc.add 0x000000008000808bL let kRndc = KeccakfRndc.add  0x800000000000008bL let kRndc = KeccakfRndc.add  0x8000000000008089L  
+    let kRndc = KeccakfRndc.add 0x8000000000008003L let kRndc = KeccakfRndc.add  0x8000000000008002L let kRndc = KeccakfRndc.add  0x8000000000000080L 
+    let kRndc = KeccakfRndc.add 0x000000000000800aL let kRndc = KeccakfRndc.add  0x800000008000000aL let kRndc = KeccakfRndc.add  0x8000000080008081L  
+    let kRndc = KeccakfRndc.add 0x8000000000008080L let kRndc = KeccakfRndc.add  0x0000000080000001L let kRndc = KeccakfRndc.add  0x8000000080008008L
+    
 
     (* keccak[f] rotate constants *)
-    let keccakf_rotc : int list in = 
-        [1;  3;  6;  10; 
-        15; 21; 28; 36; 
-        45; 55; 2;  14;
-        27; 41; 56; 8;  
-        25; 43; 62; 18; 
-        39; 61; 20; 44]
+    module KeccakfRotc = Map.Make(struct type t = int let compare = compare end)
+    let kRotc = KeccakfRotc.empty
+        let kRotc = KeccakfRotc.add 1  let kRotc = KeccakfRotc.add  3  let kRotc = KeccakfRotc.add  6  let kRotc = KeccakfRotc.add  10   
+        let kRotc = KeccakfRotc.add 15  let kRotc = KeccakfRotc.add 21  let kRotc = KeccakfRotc.add 28  let kRotc = KeccakfRotc.add 36  
+        let kRotc = KeccakfRotc.add  45  let kRotc = KeccakfRotc.add 55  let kRotc = KeccakfRotc.add 2  let kRotc = KeccakfRotc.add  14  
+        let kRotc = KeccakfRotc.add 27  let kRotc = KeccakfRotc.add 41  let kRotc = KeccakfRotc.add 56  let kRotc = KeccakfRotc.add 8  
+        let kRotc = KeccakfRotc.add   25  let kRotc = KeccakfRotc.add 43  let kRotc = KeccakfRotc.add 62  let kRotc = KeccakfRotc.add 18  
+        let kRotc = KeccakfRotc.add  39  let kRotc = KeccakfRotc.add 61  let kRotc = KeccakfRotc.add 20  let kRotc = KeccakfRotc.add 44
 
     (* keccak[f] pi lane *)
-    let keccakf_piln : int list in = 
-        [10; 7;  11; 17; 
-        18; 3; 5;  16; 
-        8;  21; 24; 4;
-        15; 23; 19; 13; 
-        12; 2; 20; 14; 
-        22; 9;  6;  1]
+    module KeccakfPiln = Map.Make(struct type t = int let compare = compare end)
+    let kPiln = KeccakfPiln.empty
+        let kRotc = KeccakfRotc.add 10 let kRotc = KeccakfRotc.add 7 let kRotc = KeccakfRotc.add  11 let kRotc = KeccakfRotc.add 17 
+        let kRotc = KeccakfRotc.add  18 let kRotc = KeccakfRotc.add 3 let kRotc = KeccakfRotc.add 5 let kRotc = KeccakfRotc.add  16 
+        let kRotc = KeccakfRotc.add  8 let kRotc = KeccakfRotc.add  21 let kRotc = KeccakfRotc.add 24 let kRotc = KeccakfRotc.add 4 
+        let kRotc = KeccakfRotc.add 15 let kRotc = KeccakfRotc.add 23 let kRotc = KeccakfRotc.add 19 let kRotc = KeccakfRotc.add 13 
+        let kRotc = KeccakfRotc.add  12 let kRotc = KeccakfRotc.add 2 let kRotc = KeccakfRotc.add 20 let kRotc = KeccakfRotc.add 14 
+        let kRotc = KeccakfRotc.add  22 let kRotc = KeccakfRotc.add 9 let kRotc = KeccakfRotc.add  6 let kRotc = KeccakfRotc.add  1
 
-    (* Recursion is preferred to for loops in functional paradigm *)
-
-
-
-    (* ROTL64 function as defined by KECCAK specs *)
+    (* ROTL64 function *)
     let rotl64 x y = 
         (* (((x) << (y)) | ((x) >> (64 - (y))))*)
-        (x lsl y) lor (x lsr (64 - y));
+        (x lsl y) lor (x lsr (64 - y)) 
 
-;
