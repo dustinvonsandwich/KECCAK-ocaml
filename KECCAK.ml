@@ -4,9 +4,6 @@
     ported by Dustin Ray - Summer 2020
 *)
     
-
-
-
 open Int64
 
 (* Keccak[f] round constants as a function f(x) *)
