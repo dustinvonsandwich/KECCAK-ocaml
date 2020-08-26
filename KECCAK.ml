@@ -5,6 +5,12 @@
     ported by Dustin Ray - Summer 2020
 *)
 
+
+    (* ROTL64 function *)
+    let rotl64 x y = 
+        (* (((x) << (y)) | ((x) >> (64 - (y))))*)
+        (x lsl y) lor (x lsr (64 - y)) 
+
     (* A note on the difference between the data structure below and a typical imperative structure as we have implemented in
     Java and Rust: You may see that we are creating a new map every time we add something to KeccakfRndc, and this is in fact what is happening.
     You may also note that this process would consume a much larger amount of memory compared to an array or a list in an imperative setting, however
@@ -21,6 +27,8 @@
         let kRndc = KeccakfRndc.add 0x000000000000800aL let kRndc = KeccakfRndc.add 0x800000008000000aL let kRndc = KeccakfRndc.add 0x8000000080008081L  
         let kRndc = KeccakfRndc.add 0x8000000000008080L let kRndc = KeccakfRndc.add 0x0000000080000001L let kRndc = KeccakfRndc.add 0x8000000080008008L
     
+    
+
 
     (* keccak[f] rotate constants *)
     module KeccakfRotc = Map.Make(struct type t = int let compare = compare end)
@@ -35,15 +43,30 @@
     (* keccak[f] pi lane *)
     module KeccakfPiln = Map.Make(struct type t = int let compare = compare end)
         let kPiln = KeccakfPiln.empty
-        let kRotc = KeccakfRotc.add 10 let kRotc = KeccakfRotc.add 7 let kRotc = KeccakfRotc.add 11 let kRotc = KeccakfRotc.add 17 
-        let kRotc = KeccakfRotc.add 18 let kRotc = KeccakfRotc.add 3 let kRotc = KeccakfRotc.add 5 let kRotc = KeccakfRotc.add 16 
-        let kRotc = KeccakfRotc.add 8 let kRotc = KeccakfRotc.add 21 let kRotc = KeccakfRotc.add 24 let kRotc = KeccakfRotc.add 4 
-        let kRotc = KeccakfRotc.add 15 let kRotc = KeccakfRotc.add 23 let kRotc = KeccakfRotc.add 19 let kRotc = KeccakfRotc.add 13 
-        let kRotc = KeccakfRotc.add 12 let kRotc = KeccakfRotc.add 2 let kRotc = KeccakfRotc.add 20 let kRotc = KeccakfRotc.add 14 
-        let kRotc = KeccakfRotc.add 22 let kRotc = KeccakfRotc.add 9 let kRotc = KeccakfRotc.add 6 let kRotc = KeccakfRotc.add 1
+        let kPiln = KeccakfPiln.add 10 let kPiln = KeccakfPiln.add 7 let kPiln = KeccakfPiln.add 11 let kPiln = KeccakfPiln.add 17 
+        let kPiln = KeccakfPiln.add 18 let kPiln = KeccakfPiln.add 3 let kPiln = KeccakfPiln.add 5 let kPiln = KeccakfPiln.add 16 
+        let kPiln = KeccakfPiln.add 8 let kPiln = KeccakfPiln.add 21 let kPiln = KeccakfPiln.add 24 let kPiln = KeccakfPiln.add 4 
+        let kPiln = KeccakfPiln.add 15 let kPiln = KeccakfPiln.add 23 let kPiln = KeccakfPiln.add 19 let kPiln = KeccakfPiln.add 13 
+        let kPiln = KeccakfPiln.add 12 let kPiln = KeccakfPiln.add 2 let kPiln = KeccakfPiln.add 20 let kPiln = KeccakfPiln.add 14 
+        let kPiln = KeccakfPiln.add 22 let kPiln = KeccakfPiln.add 9 let kPiln = KeccakfPiln.add 6 let kPiln = KeccakfPiln.add 1
 
-    (* ROTL64 function *)
-    let rotl64 x y = 
-        (* (((x) << (y)) | ((x) >> (64 - (y))))*)
-        (x lsl y) lor (x lsr (64 - y)) 
 
+    (*Main permutation. Give me st, Ill give you st back with keccak machinery applied. *)
+    let rec keccakfpermuation = (fun x -> x)
+
+        
+        
+
+
+        let t = 0
+
+        module Bc = Map.Make(struct type t = int64 let compare = compare end)
+
+        
+
+
+        
+    
+
+        
+        
